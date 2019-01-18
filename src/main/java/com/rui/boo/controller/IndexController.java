@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- *
- */
-//@Slf4j
+ * @Author rui
+ * @Date 2019-01-16 14:26
+ **/
+@Slf4j
 @Controller
 public class IndexController {
-
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(IndexController.class);
 
     @GetMapping(path = "/index")
     public String index() {
