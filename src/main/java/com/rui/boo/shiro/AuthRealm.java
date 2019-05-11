@@ -53,7 +53,7 @@ public class AuthRealm extends AuthorizingRealm {
 
         // TODO 根据userName查询用户信息
         User user = new User();
-        user.setUserName("admin");
+        user.setAccount("admin");
         user.setPassword("admin");
 
         //放入shiro.调用CredentialsMatcher检验密码

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rui.boo.mapper.MenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.rui.boo.domain.Menu">
+        <!-- ID -->
+        <id column="id" property="id"/>
+        <!-- 菜单id -->
+        <result column="menu_id" property="menuId"/>
+        <!-- 父id -->
+        <result column="parent_id" property="parentId"/>
+        <!-- 菜单名称 -->
+        <result column="name" property="name"/>
+        <!-- 访问路径 -->
+        <result column="path" property="path"/>
+        <!-- 菜单类型；1：目录；2：菜单；3：按钮 -->
+        <result column="menu_type" property="menuType"/>
+        <!-- 菜单图标 -->
+        <result column="icon" property="icon"/>
+        <!-- 排序 -->
+        <result column="sort" property="sort"/>
+        <!-- 删除标识：1：未删除；0：已删除 -->
+        <result column="del_flag" property="delFlag"/>
+        <!-- 创建时间 -->
+        <result column="create_time" property="createTime"/>
+        <!-- 更新时间 -->
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="baseColumnList">
+        `id`,
+        `menu_id`,
+        `parent_id`,
+        `name`,
+        `path`,
+        `menu_type`,
+        `icon`,
+        `sort`,
+        `del_flag`,
+        `create_time`,
+        `update_time`
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO t_base_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="domain.id != null">`id`,</if>
+            <if test="domain.menuId != null">`menu_id`,</if>
+            <if test="domain.parentId != null">`parent_id`,</if>
+            <if test="domain.name != null">`name`,</if>
+            <if test="domain.path != null">`path`,</if>
+            <if test="domain.menuType != null">`menu_type`,</if>
+            <if test="domain.icon != null">`icon`,</if>
+            <if test="domain.sort != null">`sort`,</if>
+            <if test="domain.delFlag != null">`del_flag`,</if>
+            <if test="domain.createTime != null">`create_time`,</if>
+            <if test="domain.updateTime != null">`update_time`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="domain.id != null">#{domain.id},</if>
+            <if test="domain.menuId != null">#{domain.menuId},</if>
+            <if test="domain.parentId != null">#{domain.parentId},</if>
+            <if test="domain.name != null">#{domain.name},</if>
+            <if test="domain.path != null">#{domain.path},</if>
+            <if test="domain.menuType != null">#{domain.menuType},</if>
+            <if test="domain.icon != null">#{domain.icon},</if>
+            <if test="domain.sort != null">#{domain.sort},</if>
+            <if test="domain.delFlag != null">#{domain.delFlag},</if>
+            <if test="domain.createTime != null">#{domain.createTime},</if>
+            <if test="domain.updateTime != null">#{domain.updateTime},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertList">
+        INSERT INTO t_base_menu(
+        <include refid="baseColumnList"/>
+        )VALUES
+        <foreach collection="domains" item="domain" index="index" separator=",">
+            (
+                #{domain.id},
+                #{domain.menuId},
+                #{domain.parentId},
+                #{domain.name},
+                #{domain.path},
+                #{domain.menuType},
+                #{domain.icon},
+                #{domain.sort},
+                #{domain.delFlag},
+                #{domain.createTime},
+                #{domain.updateTime}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE t_base_menu
+        <set>
+            <if test="domain.id != null">`id` = #{domain.id},</if>
+            <if test="domain.menuId != null">`menu_id` = #{domain.menuId},</if>
+            <if test="domain.parentId != null">`parent_id` = #{domain.parentId},</if>
+            <if test="domain.name != null">`name` = #{domain.name},</if>
+            <if test="domain.path != null">`path` = #{domain.path},</if>
+            <if test="domain.menuType != null">`menu_type` = #{domain.menuType},</if>
+            <if test="domain.icon != null">`icon` = #{domain.icon},</if>
+            <if test="domain.sort != null">`sort` = #{domain.sort},</if>
+            <if test="domain.delFlag != null">`del_flag` = #{domain.delFlag},</if>
+            <if test="domain.createTime != null">`create_time` = #{domain.createTime},</if>
+            <if test="domain.updateTime != null">`update_time` = #{domain.updateTime},</if>
+        </set>
+        WHERE `id` = #{domain.id}
+    </update>
+
+    <select id="select" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM t_base_menu
+        <if test="domain != null">
+            <where>
+                <if test="domain.id != null">AND `id` = #{domain.id}</if>
+                <if test="domain.menuId != null">AND `menu_id` = #{domain.menuId}</if>
+                <if test="domain.parentId != null">AND `parent_id` = #{domain.parentId}</if>
+                <if test="domain.name != null">AND `name` = #{domain.name}</if>
+                <if test="domain.path != null">AND `path` = #{domain.path}</if>
+                <if test="domain.menuType != null">AND `menu_type` = #{domain.menuType}</if>
+                <if test="domain.icon != null">AND `icon` = #{domain.icon}</if>
+                <if test="domain.sort != null">AND `sort` = #{domain.sort}</if>
+                <if test="domain.delFlag != null">AND `del_flag` = #{domain.delFlag}</if>
+                <if test="domain.createTime != null">AND `create_time` = #{domain.createTime}</if>
+                <if test="domain.updateTime != null">AND `update_time` = #{domain.updateTime}</if>
+            </where>
+        </if>
+    </select>
+
+    <select id="selectOne" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM t_base_menu
+        <if test="domain != null">
+            <where>
+                <if test="domain.id != null">AND `id` = #{domain.id}</if>
+                <if test="domain.menuId != null">AND `menu_id` = #{domain.menuId}</if>
+                <if test="domain.parentId != null">AND `parent_id` = #{domain.parentId}</if>
+                <if test="domain.name != null">AND `name` = #{domain.name}</if>
+                <if test="domain.path != null">AND `path` = #{domain.path}</if>
+                <if test="domain.menuType != null">AND `menu_type` = #{domain.menuType}</if>
+                <if test="domain.icon != null">AND `icon` = #{domain.icon}</if>
+                <if test="domain.sort != null">AND `sort` = #{domain.sort}</if>
+                <if test="domain.delFlag != null">AND `del_flag` = #{domain.delFlag}</if>
+                <if test="domain.createTime != null">AND `create_time` = #{domain.createTime}</if>
+                <if test="domain.updateTime != null">AND `update_time` = #{domain.updateTime}</if>
+            </where>
+        </if>
+        LIMIT 1
+    </select>
+
+</mapper>

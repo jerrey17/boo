@@ -45,6 +45,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.16.20'
 
 	// test
+	runtime('org.springframework.boot:spring-boot-devtools')
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

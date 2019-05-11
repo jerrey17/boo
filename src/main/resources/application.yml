@@ -22,9 +22,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       db-type: mysql
-      initial-size: 10
-      max-active: 200
-      min-idle: 10
+      initial-size: 5
+      max-active: 50
+      min-idle: 5
       validation-query: select 1
       pool-prepared-statements: true
       max-pool-prepared-statement-per-connection-size: 100
@@ -39,6 +39,11 @@ spring:
         max-active: 100
         max-idle: 20
         min-idle: 10
+
+mybatis:
+  type-aliases-package: com.rui.boo.domain
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
 
 logging:
   path: /home/log/boo

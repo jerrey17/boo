@@ -9,42 +9,46 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 用户
+ * 菜单
  *
  * @date 2019-01-18 14:41:32
  */
 @Data
 @NoArgsConstructor
-public class User implements Serializable {
+public class Menu implements Serializable {
 
     /**
      * ID
      */
     private Integer id;
     /**
-     * 用户id
+     * 菜单id
      */
-    private Long userId;
+    private Long menuId;
     /**
-     * 姓名
+     * 父id
+     */
+    private Long parentId;
+    /**
+     * 菜单名称
      */
     private String name;
     /**
-     * 密码
+     * 访问路径
      */
-    private String password;
+    private String path;
     /**
-     * 账户
+     * 菜单类型；1：目录；2：菜单；3：按钮
      */
-    private String account;
+    private Integer menuType;
     /**
-     * 邮箱
+     * 菜单图标
      */
-    private String email;
+    private String icon;
     /**
-     * 用户状态：1：正常；0：禁用
+     * 排序
      */
-    private Integer userStatus;
+    private Integer sort;
     /**
      * 删除标识：1：未删除；0：已删除
      */

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rui.boo.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.rui.boo.domain.User">
+        <!-- ID -->
+        <id column="id" property="id"/>
+        <!-- 用户id -->
+        <result column="user_id" property="userId"/>
+        <!-- 姓名 -->
+        <result column="name" property="name"/>
+        <!-- 密码 -->
+        <result column="password" property="password"/>
+        <!-- 账户 -->
+        <result column="account" property="account"/>
+        <!-- 邮箱 -->
+        <result column="email" property="email"/>
+        <!-- 用户状态：1：正常；0：禁用 -->
+        <result column="user_status" property="userStatus"/>
+        <!-- 删除标识：1：未删除；0：已删除 -->
+        <result column="del_flag" property="delFlag"/>
+        <!-- 创建时间 -->
+        <result column="create_time" property="createTime"/>
+        <!-- 更新时间 -->
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="baseColumnList">
+        `id`,
+        `user_id`,
+        `name`,
+        `password`,
+        `account`,
+        `email`,
+        `user_status`,
+        `del_flag`,
+        `create_time`,
+        `update_time`
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO t_base_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="domain.id != null">`id`,</if>
+            <if test="domain.userId != null">`user_id`,</if>
+            <if test="domain.name != null">`name`,</if>
+            <if test="domain.password != null">`password`,</if>
+            <if test="domain.account != null">`account`,</if>
+            <if test="domain.email != null">`email`,</if>
+            <if test="domain.userStatus != null">`user_status`,</if>
+            <if test="domain.delFlag != null">`del_flag`,</if>
+            <if test="domain.createTime != null">`create_time`,</if>
+            <if test="domain.updateTime != null">`update_time`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="domain.id != null">#{domain.id},</if>
+            <if test="domain.userId != null">#{domain.userId},</if>
+            <if test="domain.name != null">#{domain.name},</if>
+            <if test="domain.password != null">#{domain.password},</if>
+            <if test="domain.account != null">#{domain.account},</if>
+            <if test="domain.email != null">#{domain.email},</if>
+            <if test="domain.userStatus != null">#{domain.userStatus},</if>
+            <if test="domain.delFlag != null">#{domain.delFlag},</if>
+            <if test="domain.createTime != null">#{domain.createTime},</if>
+            <if test="domain.updateTime != null">#{domain.updateTime},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertList">
+        INSERT INTO t_base_user(
+        <include refid="baseColumnList"/>
+        )VALUES
+        <foreach collection="domains" item="domain" index="index" separator=",">
+            (
+                #{domain.id},
+                #{domain.userId},
+                #{domain.name},
+                #{domain.password},
+                #{domain.account},
+                #{domain.email},
+                #{domain.userStatus},
+                #{domain.delFlag},
+                #{domain.createTime},
+                #{domain.updateTime}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE t_base_user
+        <set>
+            <if test="domain.id != null">`id` = #{domain.id},</if>
+            <if test="domain.userId != null">`user_id` = #{domain.userId},</if>
+            <if test="domain.name != null">`name` = #{domain.name},</if>
+            <if test="domain.password != null">`password` = #{domain.password},</if>
+            <if test="domain.account != null">`account` = #{domain.account},</if>
+            <if test="domain.email != null">`email` = #{domain.email},</if>
+            <if test="domain.userStatus != null">`user_status` = #{domain.userStatus},</if>
+            <if test="domain.delFlag != null">`del_flag` = #{domain.delFlag},</if>
+            <if test="domain.createTime != null">`create_time` = #{domain.createTime},</if>
+            <if test="domain.updateTime != null">`update_time` = #{domain.updateTime},</if>
+        </set>
+        WHERE `id` = #{domain.id}
+    </update>
+
+    <select id="select" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM t_base_user
+        <if test="domain != null">
+            <where>
+                <if test="domain.id != null">AND `id` = #{domain.id}</if>
+                <if test="domain.userId != null">AND `user_id` = #{domain.userId}</if>
+                <if test="domain.name != null">AND `name` = #{domain.name}</if>
+                <if test="domain.password != null">AND `password` = #{domain.password}</if>
+                <if test="domain.account != null">AND `account` = #{domain.account}</if>
+                <if test="domain.email != null">AND `email` = #{domain.email}</if>
+                <if test="domain.userStatus != null">AND `user_status` = #{domain.userStatus}</if>
+                <if test="domain.delFlag != null">AND `del_flag` = #{domain.delFlag}</if>
+                <if test="domain.createTime != null">AND `create_time` = #{domain.createTime}</if>
+                <if test="domain.updateTime != null">AND `update_time` = #{domain.updateTime}</if>
+            </where>
+        </if>
+    </select>
+
+    <select id="selectOne" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM t_base_user
+        <if test="domain != null">
+            <where>
+                <if test="domain.id != null">AND `id` = #{domain.id}</if>
+                <if test="domain.userId != null">AND `user_id` = #{domain.userId}</if>
+                <if test="domain.name != null">AND `name` = #{domain.name}</if>
+                <if test="domain.password != null">AND `password` = #{domain.password}</if>
+                <if test="domain.account != null">AND `account` = #{domain.account}</if>
+                <if test="domain.email != null">AND `email` = #{domain.email}</if>
+                <if test="domain.userStatus != null">AND `user_status` = #{domain.userStatus}</if>
+                <if test="domain.delFlag != null">AND `del_flag` = #{domain.delFlag}</if>
+                <if test="domain.createTime != null">AND `create_time` = #{domain.createTime}</if>
+                <if test="domain.updateTime != null">AND `update_time` = #{domain.updateTime}</if>
+            </where>
+        </if>
+        LIMIT 1
+    </select>
+
+</mapper>

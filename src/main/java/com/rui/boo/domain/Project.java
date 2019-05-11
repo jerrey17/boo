@@ -9,42 +9,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 用户
+ * 项目
  *
  * @date 2019-01-18 14:41:32
  */
 @Data
 @NoArgsConstructor
-public class User implements Serializable {
+public class Project implements Serializable {
 
     /**
      * ID
      */
     private Integer id;
     /**
-     * 用户id
+     * 项目id
      */
-    private Long userId;
+    private Long projectId;
     /**
-     * 姓名
+     * 项目名称
      */
     private String name;
     /**
-     * 密码
+     * 备注
      */
-    private String password;
-    /**
-     * 账户
-     */
-    private String account;
-    /**
-     * 邮箱
-     */
-    private String email;
-    /**
-     * 用户状态：1：正常；0：禁用
-     */
-    private Integer userStatus;
+    private String remark;
     /**
      * 删除标识：1：未删除；0：已删除
      */

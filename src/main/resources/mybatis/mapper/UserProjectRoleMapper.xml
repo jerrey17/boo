@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rui.boo.mapper.UserProjectRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.rui.boo.domain.UserProjectRole">
+        <!-- ID -->
+        <id column="id" property="id"/>
+        <!-- 用户id -->
+        <result column="user_Id" property="userId"/>
+        <!-- 项目id -->
+        <result column="project_id" property="projectId"/>
+        <!-- 角色id -->
+        <result column="role_id" property="roleId"/>
+        <!-- 默认标识：0：不是默认；1：默认项目 -->
+        <result column="default_flag" property="defaultFlag"/>
+        <!-- 创建时间 -->
+        <result column="create_time" property="createTime"/>
+        <!-- 更新时间 -->
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="baseColumnList">
+        `id`,
+        `user_Id`,
+        `project_id`,
+        `role_id`,
+        `default_flag`,
+        `create_time`,
+        `update_time`
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO t_base_user_project_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="domain.id != null">`id`,</if>
+            <if test="domain.userId != null">`user_Id`,</if>
+            <if test="domain.projectId != null">`project_id`,</if>
+            <if test="domain.roleId != null">`role_id`,</if>
+            <if test="domain.defaultFlag != null">`default_flag`,</if>
+            <if test="domain.createTime != null">`create_time`,</if>
+            <if test="domain.updateTime != null">`update_time`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="domain.id != null">#{domain.id},</if>
+            <if test="domain.userId != null">#{domain.userId},</if>
+            <if test="domain.projectId != null">#{domain.projectId},</if>
+            <if test="domain.roleId != null">#{domain.roleId},</if>
+            <if test="domain.defaultFlag != null">#{domain.defaultFlag},</if>
+            <if test="domain.createTime != null">#{domain.createTime},</if>
+            <if test="domain.updateTime != null">#{domain.updateTime},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertList">
+        INSERT INTO t_base_user_project_role(
+        <include refid="baseColumnList"/>
+        )VALUES
+        <foreach collection="domains" item="domain" index="index" separator=",">
+            (
+                #{domain.id},
+                #{domain.userId},
+                #{domain.projectId},
+                #{domain.roleId},
+                #{domain.defaultFlag},
+                #{domain.createTime},
+                #{domain.updateTime}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE t_base_user_project_role
+        <set>
+            <if test="domain.id != null">`id` = #{domain.id},</if>
+            <if test="domain.userId != null">`user_Id` = #{domain.userId},</if>
+            <if test="domain.projectId != null">`project_id` = #{domain.projectId},</if>
+            <if test="domain.roleId != null">`role_id` = #{domain.roleId},</if>
+            <if test="domain.defaultFlag != null">`default_flag` = #{domain.defaultFlag},</if>
+            <if test="domain.createTime != null">`create_time` = #{domain.createTime},</if>
+            <if test="domain.updateTime != null">`update_time` = #{domain.updateTime},</if>
+        </set>
+        WHERE `id` = #{domain.id}
+    </update>
+
+    <select id="select" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM t_base_user_project_role
+        <if test="domain != null">
+            <where>
+                <if test="domain.id != null">AND `id` = #{domain.id}</if>
+                <if test="domain.userId != null">AND `user_Id` = #{domain.userId}</if>
+                <if test="domain.projectId != null">AND `project_id` = #{domain.projectId}</if>
+                <if test="domain.roleId != null">AND `role_id` = #{domain.roleId}</if>
+                <if test="domain.defaultFlag != null">AND `default_flag` = #{domain.defaultFlag}</if>
+                <if test="domain.createTime != null">AND `create_time` = #{domain.createTime}</if>
+                <if test="domain.updateTime != null">AND `update_time` = #{domain.updateTime}</if>
+            </where>
+        </if>
+    </select>
+
+    <select id="selectOne" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM t_base_user_project_role
+        <if test="domain != null">
+            <where>
+                <if test="domain.id != null">AND `id` = #{domain.id}</if>
+                <if test="domain.userId != null">AND `user_Id` = #{domain.userId}</if>
+                <if test="domain.projectId != null">AND `project_id` = #{domain.projectId}</if>
+                <if test="domain.roleId != null">AND `role_id` = #{domain.roleId}</if>
+                <if test="domain.defaultFlag != null">AND `default_flag` = #{domain.defaultFlag}</if>
+                <if test="domain.createTime != null">AND `create_time` = #{domain.createTime}</if>
+                <if test="domain.updateTime != null">AND `update_time` = #{domain.updateTime}</if>
+            </where>
+        </if>
+        LIMIT 1
+    </select>
+
+</mapper>

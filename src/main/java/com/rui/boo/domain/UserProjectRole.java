@@ -3,19 +3,18 @@ package com.rui.boo.domain;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.Long;
-import java.lang.String;
 import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 用户
+ * 用户-项目-角色 关系
  *
  * @date 2019-01-18 14:41:32
  */
 @Data
 @NoArgsConstructor
-public class User implements Serializable {
+public class UserProjectRole implements Serializable {
 
     /**
      * ID
@@ -26,29 +25,17 @@ public class User implements Serializable {
      */
     private Long userId;
     /**
-     * 姓名
+     * 项目id
      */
-    private String name;
+    private Long projectId;
     /**
-     * 密码
+     * 角色id
      */
-    private String password;
+    private Long roleId;
     /**
-     * 账户
+     * 默认标识：0：不是默认；1：默认项目
      */
-    private String account;
-    /**
-     * 邮箱
-     */
-    private String email;
-    /**
-     * 用户状态：1：正常；0：禁用
-     */
-    private Integer userStatus;
-    /**
-     * 删除标识：1：未删除；0：已删除
-     */
-    private Integer delFlag;
+    private Integer defaultFlag;
     /**
      * 创建时间
      */
