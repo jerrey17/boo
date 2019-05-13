@@ -156,4 +156,33 @@
         LIMIT 1
     </select>
 
+    <select id="selectParentMenusByUserAndProject" resultMap="baseResultMap">
+        SELECT
+            m.*
+        FROM
+            `t_base_menu` m
+        INNER JOIN `t_base_role_menu` rm ON rm.menu_id = m.menu_id
+        INNER JOIN `t_base_user_project_role` upr ON upr.role_id = rm.role_id
+        WHERE
+            upr.project_id = #{projectId}
+        AND upr.user_Id = #{userId}
+        AND m.parent_id = 0
+        AND m.del_flag = 1
+        ORDER BY
+            m.sort ASC
+    </select>
+
+    <select id="selectMenuByParentId" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM
+        `t_base_menu`
+        WHERE
+        parent_id = #{parentId}
+        AND menu_type = 2
+        AND del_flag = 1
+        ORDER BY
+        sort ASC
+    </select>
+
 </mapper>

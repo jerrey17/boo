@@ -23,4 +23,6 @@ public interface ProjectMapper {
 
     Project selectOne(@Param("domain") Project domain);
 
+    List<Project> selectByUserId(@Param("userId") Long userId);
+
 }

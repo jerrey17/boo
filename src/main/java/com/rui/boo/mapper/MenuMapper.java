@@ -23,4 +23,8 @@ public interface MenuMapper {
 
     Menu selectOne(@Param("domain") Menu domain);
 
+    List<Menu> selectParentMenusByUserAndProject(@Param("userId") Long userId, @Param("projectId") Long projectId);
+
+    List<Menu> selectMenuByParentId(@Param("parentId") Long parentId);
+
 }

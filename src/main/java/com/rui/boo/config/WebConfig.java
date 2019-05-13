@@ -2,12 +2,9 @@ package com.rui.boo.config;
 
 
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration;
-import org.springframework.validation.Validator;
 import org.springframework.web.method.HandlerTypePredicate;
 import org.springframework.web.reactive.config.PathMatchConfigurer;
 import org.springframework.web.reactive.config.ResourceHandlerRegistry;
-import org.springframework.web.reactive.config.ViewResolverRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 /**

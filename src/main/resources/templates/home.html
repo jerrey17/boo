@@ -46,31 +46,22 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" class="site-demo-active" data-url="/boo/main" data-id="11" data-title="选项a" data-type="tabAdd">列表一</a></dd>
-                        <dd><a href="javascript:;" class="site-demo-active" data-url="a1" data-id="111" data-title="选项a1" data-type="tabAdd">列表二</a></dd>
-                        <dd><a href="javascript:;" class="site-demo-active" data-url="a2" data-id="112" data-title="选项a2" data-type="tabAdd">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                <li class="layui-nav-item layui-nav-itemed" th:each="menuTree:${menuTree}">
+                    <a class="" href="javascript:;" th:text="${menuTree.parent.name}"></a>
+                    <dl class="layui-nav-child" th:each="menu:${menuTree.menus}">
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd"
+                               th:attr="data-url=${menu.path},data-id=${menu.menuId},data-title=${menu.name}"
+                               th:text="${menu.name}"></a>
+                        </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">解决方案</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
             </ul>
         </div>
     </div>
 
     <div class="layui-body">
-        <div class="layui-tab layui-tab-brief" lay-filter="main_tab" lay-allowclose="true" style="padding-top:5px; margin-top:0px;">
+        <div class="layui-tab layui-tab-brief" lay-filter="main_tab" lay-allowclose="true"
+             style="padding-top:5px; margin-top:0px;">
             <ul class="layui-tab-title">
                 <li class="layui-this" lay-id="main_page">主页</li>
             </ul>

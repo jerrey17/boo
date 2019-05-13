@@ -120,4 +120,15 @@
         LIMIT 1
     </select>
 
+    <select id="selectByUserId" resultMap="baseResultMap">
+        SELECT
+            p.*
+        FROM
+            t_base_project p
+        INNER JOIN t_base_user_project_role upr ON upr.project_id = p.project_id
+        WHERE
+            upr.user_Id = #{userId}
+        AND p.del_flag = 1
+    </select>
+
 </mapper>
