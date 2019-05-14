@@ -27,10 +27,19 @@ public class LoginController {
     private ProjectService projectService;
 
     /**
-     * login
+     * login page
      * @return
      */
     @GetMapping(path = "/login")
+    public String login() {
+        return "login";
+    }
+
+    /**
+     * login
+     * @return
+     */
+    @PostMapping(path = "/login")
     public String login(Model model) {
 
         // todo set login param setting
