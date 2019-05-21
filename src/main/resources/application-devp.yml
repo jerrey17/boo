@@ -6,6 +6,9 @@ logging:
       dd: debug
 
 spring:
+  profiles:
+    active: devp
+    include: shiro
   datasource:
     druid:
       name: boo

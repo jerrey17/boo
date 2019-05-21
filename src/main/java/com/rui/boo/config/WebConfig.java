@@ -21,7 +21,7 @@ public class WebConfig implements WebFluxConfigurer {
 
     @Override
     public void configurePathMatching(PathMatchConfigurer configurer) {
-        configurer.addPathPrefix("/boo", HandlerTypePredicate.builder().basePackage("com.rui.boo").build());
+//        configurer.addPathPrefix("/boo", HandlerTypePredicate.builder().basePackage("com.rui.boo").build());
     }
 
 }

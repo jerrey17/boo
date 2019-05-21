@@ -1,0 +1,7 @@
+shiro:
+  enabled: true
+  web:
+    enabled: true
+  loginUrl: "/login"
+  userNativeSessionManager: true
+  successUrl: "/index"
