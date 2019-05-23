@@ -147,4 +147,12 @@
         LIMIT 1
     </select>
 
+    <select id="selectByAcc" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM t_base_user
+        WHERE `account` = #{account}
+        AND `del_flag` = 1
+    </select>
+
 </mapper>

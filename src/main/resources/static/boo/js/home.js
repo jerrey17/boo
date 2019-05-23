@@ -3,6 +3,24 @@ layui.use('element', function () {
     var $ = layui.jquery;
     var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 
+    var show = true;
+    $('#animation-left-nav').click(function(){
+        if (show) {
+            $(".layui-side").animate({width : 'toggle'});
+            $(".layui-body").animate({left : '0px'});
+            $(".layui-footer").animate({left : '0px'});
+
+            // $('#animation-left-nav').toggleClass("layui-icon-shrink-left");
+            // $('#animation-left-nav').removeClass("layui-icon-shrink-right");
+            show = false;
+        } else {
+            $(".layui-side").animate({width : 'toggle'});
+            $(".layui-body").animate({left : '200px'});
+            $(".layui-footer").animate({left : '200px'});
+            show = true;
+        }
+    });
+
     /**
      * 触发事件
      */
@@ -40,7 +58,7 @@ layui.use('element', function () {
     /**
      * 单击事件：点击左边菜单栏
      */
-    $('.site-demo-active').on('click', function () {
+    $('.menu-active').on('click', function () {
         var dataId = $(this);
         //判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
         if ($(".layui-tab-title li[lay-id]").length <= 0) {

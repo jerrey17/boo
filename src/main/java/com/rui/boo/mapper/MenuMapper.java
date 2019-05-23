@@ -29,4 +29,6 @@ public interface MenuMapper {
 
     List<Menu> selectMenuByParentId(@Param("parentId") Long parentId);
 
+    List<Menu> selectMenusByUserId(@Param("userId") Long userId);
+
 }

@@ -25,4 +25,6 @@ public interface UserMapper {
 
     User selectOne(@Param("domain") User domain);
 
+    User selectByAcc(@Param("account") String account);
+
 }

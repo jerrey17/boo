@@ -147,4 +147,16 @@
         LIMIT 1
     </select>
 
+    <select id="selectByUserId" resultMap="baseResultMap">
+        SELECT DISTINCT
+            r.*
+        FROM
+            `t_base_role` r
+        INNER JOIN `t_base_user_project_role` upr ON upr.role_id = r.role_id
+        WHERE
+            upr.user_Id = #{userId}
+        AND r.del_flag = 1
+
+    </select>
+
 </mapper>

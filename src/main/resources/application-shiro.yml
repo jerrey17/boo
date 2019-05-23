@@ -3,5 +3,6 @@ shiro:
   web:
     enabled: true
   loginUrl: "/login"
-  userNativeSessionManager: true
   successUrl: "/index"
+  unauthorizedUrl: "/common/401"
+  userNativeSessionManager: true

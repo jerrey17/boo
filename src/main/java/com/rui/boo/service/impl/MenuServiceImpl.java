@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 菜单
@@ -43,5 +45,11 @@ public class MenuServiceImpl implements MenuService {
         });
 
         return treeModels;
+    }
+
+    @Override
+    public Set<String> getPermsByUserId(long userId) {
+        List<Menu> menus = menuMapper.selectMenusByUserId(userId);
+        return menus.stream().map(data -> data.getPath()).collect(Collectors.toSet());
     }
 }

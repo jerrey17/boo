@@ -3,6 +3,7 @@ package com.rui.boo.service;
 import com.rui.boo.model.MenuTreeModel;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Author rui
@@ -17,4 +18,11 @@ public interface MenuService {
      * @return
      */
     List<MenuTreeModel> getMenuTree(Long userId, Long projectId);
+
+    /**
+     * 用户id获取菜单权限列表
+     * @param userId
+     * @return
+     */
+    Set<String> getPermsByUserId(long userId);
 }

@@ -10,11 +10,11 @@
     <legend>LOGIN</legend>
 </fieldset>
 
-<form class="layui-form" action="">
+<form class="layui-form" action="/login" method="post">
     <div class="layui-form-item">
         <label class="layui-form-label"><i class="layui-icon layui-icon-username"></i></label>
         <div class="layui-input-inline">
-            <input type="text" name="username" lay-verify="required|phone" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+            <input type="text" name="username" lay-verify="required" autocomplete="off" placeholder="请输入手机号" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -32,6 +32,6 @@
 </form>
 
 <th:block th:replace="common-src :: common_js"/>
-<script th:src="@{/static/boo/js/login.js}"></script>
+<script th:src="@{/boo/js/login.js}"></script>
 </body>
 </html>

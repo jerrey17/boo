@@ -5,6 +5,8 @@ import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Date;
+import java.util.Objects;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -62,4 +64,10 @@ public class Menu implements Serializable {
      */
     private Date updateTime;
 
+    public String getIcon() {
+        if(Objects.isNull(icon)) {
+            return "layui-icon-more-vertical";
+        }
+        return icon;
+    }
 }

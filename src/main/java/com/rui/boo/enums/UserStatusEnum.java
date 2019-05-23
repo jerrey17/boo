@@ -19,6 +19,13 @@ public enum UserStatusEnum {
 
     private String msg;
 
-
+    public static UserStatusEnum getByCode(int code) {
+        for(UserStatusEnum statusEnum : values()) {
+            if(statusEnum.getCode() == code) {
+                return statusEnum;
+            }
+        }
+        return null;
+    }
 
 }

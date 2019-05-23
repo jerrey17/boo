@@ -25,4 +25,6 @@ public interface RoleMapper {
 
     Role selectOne(@Param("domain") Role domain);
 
+    List<Role> selectByUserId(@Param("userId") Long userId);
+
 }

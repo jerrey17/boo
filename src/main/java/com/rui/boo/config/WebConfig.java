@@ -19,9 +19,9 @@ public class WebConfig implements WebFluxConfigurer {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 
-    @Override
-    public void configurePathMatching(PathMatchConfigurer configurer) {
+//    @Override
+//    public void configurePathMatching(PathMatchConfigurer configurer) {
 //        configurer.addPathPrefix("/boo", HandlerTypePredicate.builder().basePackage("com.rui.boo").build());
-    }
+//    }
 
 }

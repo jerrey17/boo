@@ -11,6 +11,9 @@
     <div class="layui-header layui-bg-green">
         <div class="layui-logo" style="color: darkslategray;">后台管理系统</div>
         <ul class="layui-nav layui-layout-left">
+            <span class="layui-icon layui-icon-shrink-right layui-icon-shrink-left"
+                  id="animation-left-nav"
+                  style="font-size: 30px; color: orangered;"></span>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
@@ -32,9 +35,13 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed" th:each="menuTree:${menuTree}">
-                    <a class="" href="javascript:;" th:text="${menuTree.parent.name}"></a>
+                    <a href="javascript:;"
+                       th:class="'layui-icon '+ ${menuTree.parent.icon}"
+                       th:text="${menuTree.parent.name}"></a>
                     <dl class="layui-nav-child" th:each="menu:${menuTree.menus}">
-                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd"
+                        <dd>
+                            <a href="javascript:;" data-type="tabAdd"
+                               th:class="'menu-active layui-icon '+ ${menu.icon}"
                                th:attr="data-url=${menu.path},data-id=${menu.menuId},data-title=${menu.name}"
                                th:text="${menu.name}"></a>
                         </dd>
@@ -58,7 +65,7 @@
 </div>
 
 <th:block th:replace="common-src :: common_js"/>
-<script th:src="@{/static/boo/js/home.js}"></script>
+<script th:src="@{/boo/js/home.js}"></script>
 
 </body>
 </html>
