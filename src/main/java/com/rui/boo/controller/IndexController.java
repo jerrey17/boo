@@ -1,6 +1,8 @@
 package com.rui.boo.controller;
 
 import com.rui.boo.domain.Project;
+import com.rui.boo.enums.ErrorEnums;
+import com.rui.boo.exception.BizException;
 import com.rui.boo.model.MenuTreeModel;
 import com.rui.boo.service.MenuService;
 import com.rui.boo.service.ProjectService;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -44,17 +45,15 @@ public class IndexController {
      */
     @GetMapping(path = "/home/{parentId}")
     public String home(@PathVariable("parentId") Long parentId, Model model) {
-
-        // todo validate param: parentId
-        // todo get userId from session
-        long userId = 10000;
-
-
+        if(parentId == null) {
+            throw new BizException(ErrorEnums.PROJECT_NOT_EXIT);
+        }
+        AuthUser user = (AuthUser) SecurityUtils.getSubject().getPrincipal();
+        long userId = user.getUserId();
         List<MenuTreeModel> menuTreeModels = menuService.getMenuTree(userId, parentId);
-        log.info("跳转主页-用户[{}-{}]获取菜单列表:{}", userId, parentId, menuTreeModels);
-
         model.addAttribute("menuTree", menuTreeModels);
 
+        log.info("主页[home]-用户[{}-{}]获取菜单列表:{}", userId, parentId, menuTreeModels);
         return "home";
     }
 

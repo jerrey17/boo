@@ -32,7 +32,7 @@ layui.use('element', function () {
             //新增Tab
             element.tabAdd('main_tab', {
                 title: name,
-                content: '<iframe data-frameid="' + id + '" scrolling="auto" frameborder="0" src="' + url + '" style="width:100%; height:99%;"></iframe>',
+                content: '<iframe class = "layui-anim layui-anim-up" data-frameid="' + id + '" scrolling="auto" frameborder="0" src="' + url + '" style="width:100%; height:99%;"></iframe>',
                 id: id
             })
             // CustomRightClick(id); //给tab绑定右击事件

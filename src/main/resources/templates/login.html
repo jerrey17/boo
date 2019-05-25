@@ -12,15 +12,21 @@
 
 <form class="layui-form" action="/login" method="post">
     <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline" id="msgTxt" style="color: red;" th:text="${message}"></div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label"><i class="layui-icon layui-icon-username"></i></label>
         <div class="layui-input-inline">
-            <input type="text" name="username" lay-verify="required" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+            <input type="text" class="layui-input" name="username" style="width: 200px;"
+                   autocomplete="off" placeholder="请输入用户名">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label"><i class="layui-icon layui-icon-password"></i></label>
         <div class="layui-input-inline">
-            <input type="password" name="password" lay-verify="pwd" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            <input type="password" class="layui-input" name="password" style="width: 200px;"
+                   placeholder="请输入密码" autocomplete="off">
         </div>
     </div>
 
@@ -30,6 +36,14 @@
         </div>
     </div>
 </form>
+
+<hr class="layui-bg-red">
+<hr class="layui-bg-orange">
+<hr class="layui-bg-green">
+<hr class="layui-bg-cyan">
+<hr class="layui-bg-blue">
+<hr class="layui-bg-black">
+<hr class="layui-bg-gray">
 
 <th:block th:replace="common-src :: common_js"/>
 <script th:src="@{/boo/js/login.js}"></script>

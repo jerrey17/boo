@@ -1,22 +1,30 @@
 layui.use(['form'], function () {
+
     var $ = layui.jquery;
     var form = layui.form,
         layer = layui.layer;
 
-    //自定义验证规则
-    form.verify({
-        pwd: [
-            /^[\S]{6,12}$/,
-            '密码必须6~12位，且不能出现空格'
-        ]
-    });
-
     //监听提交
     form.on('submit(login)', function (data) {
-        
-        layer.alert(JSON.stringify(data.field), {
-            title: '最终的提交信息'
-        })
+        var field = data.field;
+        var username = field.username;
+        var password = field.password;
+        if(username == "" || username == null) {
+            $("#msgTxt").html("用户名不能为空");
+            return false;
+        }
+        if(username.length < 5 || username.length > 24) {
+            $("#msgTxt").html("用户名为5~24位字符");
+            return false;
+        }
+        if(password == "" || password == null) {
+            $("#msgTxt").html("密码不能为空");
+            return false;
+        }
+        if(password.length < 6 || password.length > 24) {
+            $("#msgTxt").html("密码为6~24位字符");
+            return false;
+        }
         return true;
     });
 });

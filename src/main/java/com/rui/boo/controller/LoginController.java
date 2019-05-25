@@ -1,20 +1,18 @@
 package com.rui.boo.controller;
 
-import com.rui.boo.controller.message.LoginReq;
-import com.rui.boo.domain.Project;
-import com.rui.boo.service.ProjectService;
-import com.rui.boo.shiro.AuthUser;
+import com.rui.boo.exception.BizException;
+import com.rui.boo.message.LoginReq;
+import lombok.experimental.var;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 /**
  * @Author rui
@@ -23,9 +21,6 @@ import java.util.List;
 @Slf4j
 @Controller
 public class LoginController {
-
-    @Autowired
-    private ProjectService projectService;
 
     /**
      * login page
@@ -45,18 +40,23 @@ public class LoginController {
      */
     @PostMapping(path = "/login")
     public String login(LoginReq req, Model model) {
-        UsernamePasswordToken token = new UsernamePasswordToken(req.getUsername(), req.getPassword());
-        Subject subject = SecurityUtils.getSubject();
-        subject.login(token);
-//        AuthUser user = (AuthUser) subject.getPrincipal();
-//        List<Project> projects = projectService.getProjectByUserId(user.getUserId());
-//        model.addAttribute("projects", projects);
+        try {
+            UsernamePasswordToken token = new UsernamePasswordToken(req.getUsername(), req.getPassword());
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(token);
+        } catch (AuthenticationException e) {
+            String message;
+            if(e instanceof IncorrectCredentialsException) {
+                message = "密码错误";
+            } else {
+                message = e.getMessage();
+            }
+            model.addAttribute("message", message);
+            return "login";
+        } catch (Exception e) {
+            throw e;
+        }
         return "redirect:/index";
-//        return Mono.just(req).map(data -> {
-//        }).onErrorResume(throwable -> {
-//            log.error("登录异常!", throwable);
-//            return Mono.just("redirect:/login");
-//        });
     }
 
 }

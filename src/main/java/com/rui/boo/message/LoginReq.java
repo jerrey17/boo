@@ -1,4 +1,4 @@
-package com.rui.boo.controller.message;
+package com.rui.boo.message;
 
 import lombok.Data;
 

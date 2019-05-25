@@ -62,8 +62,8 @@ public class ShiroConfig {
         chain.addPathDefinition("/admin/**", "authc, roles[admin]");
 
         // 其他路径都需要权限访问
-//        chain.addPathDefinition("/**", "authc");
-        chain.addPathDefinition("/**", "anon");
+        chain.addPathDefinition("/**", "authc");
+//        chain.addPathDefinition("/**", "anon");
         return chain;
     }
 
