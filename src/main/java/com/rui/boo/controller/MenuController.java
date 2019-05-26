@@ -18,19 +18,19 @@ import java.util.List;
 @Controller
 public class MenuController {
 
-    @Autowired
-    private MenuService menuService;
-
-    @GetMapping(path = "/list/{parentId}")
-    public List<MenuTreeModel> getMenuTree(@PathVariable("parentId") Long parentId) {
-        // todo validate param: parentId
-        // todo get userId from session
-        long userId = 10000;
-
-        log.info("用户[{}-{}]获取菜单列表！", userId, parentId);
-
-        List<MenuTreeModel> menuTreeModels = menuService.getMenuTree(userId, parentId);
-
-        return menuTreeModels;
-    }
+//    @Autowired
+//    private MenuService menuService;
+//
+//    @GetMapping(path = "/list/{parentId}")
+//    public List<MenuTreeModel> getMenuTree(@PathVariable("parentId") Long parentId) {
+//        // todo validate param: parentId
+//        // todo get userId from session
+//        long userId = 10000;
+//
+//        log.info("用户[{}-{}]获取菜单列表！", userId, parentId);
+//
+//        List<MenuTreeModel> menuTreeModels = menuService.getMenuTree(userId, parentId);
+//
+//        return menuTreeModels;
+//    }
 }

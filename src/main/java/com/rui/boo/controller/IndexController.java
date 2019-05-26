@@ -9,6 +9,7 @@ import com.rui.boo.service.ProjectService;
 import com.rui.boo.shiro.AuthUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,11 @@ public class IndexController {
     @Autowired
     private MenuService menuService;
 
+    /**
+     * 项目index
+     * @param model
+     * @return
+     */
     @GetMapping(path = "/index")
     public String index(Model model) {
         AuthUser user = (AuthUser) SecurityUtils.getSubject().getPrincipal();
@@ -57,27 +63,12 @@ public class IndexController {
         return "home";
     }
 
-    @GetMapping(path = "/main")
-    public String main() {
-
-        return "main";
-    }
-
-    @GetMapping(path = "/common/404")
-    public Mono<String> p404() {
-
-        return Mono.just("404");
-    }
-
-    @GetMapping(path = "/common/500")
-    public Mono<String> p500() {
-
-        return Mono.just("500");
-    }
-
-    @GetMapping(path = "/common/401")
+    /**
+     * 未授权跳转
+     * @return
+     */
+    @GetMapping(path = "/error/401")
     public Mono<String> p401() {
-
-        return Mono.just("401");
+        return Mono.just("error/401");
     }
 }

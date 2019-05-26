@@ -1,6 +1,7 @@
 package com.rui.boo.service.impl;
 
 import com.rui.boo.domain.Menu;
+import com.rui.boo.exception.BizException;
 import com.rui.boo.mapper.MenuMapper;
 import com.rui.boo.model.MenuTreeModel;
 import com.rui.boo.service.MenuService;
@@ -32,7 +33,7 @@ public class MenuServiceImpl implements MenuService {
         List<Menu> parents = menuMapper.selectParentMenusByUserAndProject(userId, projectId);
 
         if(Objects.isNull(parents)) {
-            throw new RuntimeException("没有配置菜单");
+            throw new BizException("没有配置菜单");
         }
 
         final List<MenuTreeModel> treeModels = new ArrayList<>();

@@ -1,8 +1,6 @@
 package com.rui.boo.controller;
 
-import com.rui.boo.exception.BizException;
 import com.rui.boo.message.LoginReq;
-import lombok.experimental.var;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -24,6 +22,7 @@ public class LoginController {
 
     /**
      * login page
+     *
      * @return
      */
     @GetMapping(path = "/login")
@@ -36,6 +35,7 @@ public class LoginController {
 
     /**
      * login
+     *
      * @return
      */
     @PostMapping(path = "/login")
@@ -46,7 +46,7 @@ public class LoginController {
             subject.login(token);
         } catch (AuthenticationException e) {
             String message;
-            if(e instanceof IncorrectCredentialsException) {
+            if (e instanceof IncorrectCredentialsException) {
                 message = "密码错误";
             } else {
                 message = e.getMessage();

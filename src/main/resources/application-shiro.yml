@@ -4,5 +4,5 @@ shiro:
     enabled: true
   loginUrl: "/login"
   successUrl: "/index"
-  unauthorizedUrl: "/common/401"
+  unauthorizedUrl: "/error/401"
   userNativeSessionManager: true
