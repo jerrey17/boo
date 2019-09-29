@@ -9,7 +9,6 @@ import com.rui.boo.service.ProjectService;
 import com.rui.boo.shiro.AuthUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +57,7 @@ public class IndexController {
         long userId = user.getUserId();
         List<MenuTreeModel> menuTreeModels = menuService.getMenuTree(userId, parentId);
         model.addAttribute("menuTree", menuTreeModels);
+        model.addAttribute("account", user.getAccount());
 
         log.info("主页[home]-用户[{}-{}]获取菜单列表:{}", userId, parentId, menuTreeModels);
         return "home";

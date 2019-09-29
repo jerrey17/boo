@@ -40,6 +40,9 @@ public class LoginController {
      */
     @PostMapping(path = "/login")
     public String login(LoginReq req, Model model) {
+        if (SecurityUtils.getSubject().isAuthenticated()) {
+            return "redirect:/index";
+        }
         try {
             UsernamePasswordToken token = new UsernamePasswordToken(req.getUsername(), req.getPassword());
             Subject subject = SecurityUtils.getSubject();

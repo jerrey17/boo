@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="common-src :: common_header(~{::title},~{})">
+<head th:replace="common-src :: common_header(~{::title},~{::style})">
     <title>HOME</title>
+    <style type="text/css">
+    </style>
 </head>
 
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
 
     <div class="layui-header layui-bg-green">
-        <div class="layui-logo" style="color: darkslategray;">后台管理系统</div>
-        <ul class="layui-nav layui-layout-left">
-            <span class="layui-icon layui-icon-shrink-right layui-icon-shrink-left"
-                  id="animation-left-nav"
-                  style="font-size: 30px; color: orangered;"></span>
+
+        <div class="layui-logo" style="color: silver; font-size: xx-large;">Logo</div>
+
+        <ul class="layui-nav layui-layout-left" style="margin-left: 0px; padding-left: 0px;">
+            <li class="layui-nav-item">
+                <span class="layui-icon layui-icon-shrink-right" id="animation-left-nav" style="color: #FF5722;"></span>
+            </li>
+
         </ul>
+
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <i class="layui-icon layui-icon-username" style="color: #FF5722;"></i>
-                    姓名
+                    <span th:text="${account}"></span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+                    <dd><a class="layui-icon layui-icon-about" href="javascript:;">关于我们</a></dd>
+                    <dd><a class="my layui-icon layui-icon-username" href="javascript:;"
+                           data-method="setTop">个人信息</a></dd>
+                    <dd><a class="layui-icon layui-icon-password" href="javascript:;">修改密码</a></dd>
+                    <dd><a class="layui-icon layui-icon-close" href="javascript:;">退出登录</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
         </ul>
     </div>
 
@@ -54,7 +62,7 @@
     <div class="layui-body">
         <div class="layui-tab layui-tab-brief" lay-filter="main_tab" lay-allowclose="true" style="padding-top:5px; margin-top:0px;">
             <ul class="layui-tab-title">
-                <li class="layui-this" lay-id="main_page">主页</li>
+                <li class="layui-this layui-icon layui-icon-home" lay-id="main_page">主页</li>
             </ul>
             <div class="layui-tab-content" th:insert="~{main :: main_page}"></div>
         </div>
@@ -66,6 +74,7 @@
 
 <th:block th:replace="common-src :: common_js"/>
 <script th:src="@{/boo/js/home.js}"></script>
+<script th:src="@{/boo/js/my.js}"></script>
 
 </body>
 </html>
