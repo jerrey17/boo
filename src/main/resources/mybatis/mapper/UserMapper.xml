@@ -155,4 +155,27 @@
         AND `del_flag` = 1
     </select>
 
+    <select id="selectCount" resultType="int">
+        SELECT
+        count(*)
+        FROM t_base_user
+    </select>
+
+    <select id="selectByPage" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM t_base_user
+        <if test="model != null">
+            <where>
+                <if test="model.name != null">AND `name` = #{model.name}</if>
+                <if test="model.account != null">AND `account` = #{model.account}</if>
+                <if test="model.email != null">AND `email` = #{model.email}</if>
+                <if test="model.userStatus != null">AND `user_status` = #{model.userStatus}</if>
+                <if test="model.delFlag != null">AND `del_flag` = #{model.delFlag}</if>
+                <if test="model.createTime != null">AND `create_time` = #{model.createTime}</if>
+            </where>
+        </if>
+        LIMIT #{model.offset}, #{model.limit}
+    </select>
+
 </mapper>

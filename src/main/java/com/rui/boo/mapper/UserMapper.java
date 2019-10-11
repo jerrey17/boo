@@ -2,6 +2,8 @@ package com.rui.boo.mapper;
 
 import com.rui.boo.domain.User;
 import java.util.List;
+
+import com.rui.boo.model.UserQueryModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -26,5 +28,9 @@ public interface UserMapper {
     User selectOne(@Param("domain") User domain);
 
     User selectByAcc(@Param("account") String account);
+
+    int selectCount();
+
+    List<User> selectByPage(@Param("model") UserQueryModel model);
 
 }

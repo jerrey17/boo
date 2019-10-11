@@ -13,6 +13,7 @@ import lombok.Getter;
 public enum ErrorEnums implements Message {
 
     SYS_ERROR("000000", "系统异常"),
+    PARAM_ERROR("100000", "参数异常"),
 
     PROJECT_NOT_EXIT("100001", "项目不存在"),
 

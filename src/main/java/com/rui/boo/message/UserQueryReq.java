@@ -1,26 +1,20 @@
-package com.rui.boo.domain;
+package com.rui.boo.message;
 
-import java.io.Serializable;
-import java.lang.Integer;
-import java.lang.Long;
-import java.lang.String;
-import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
- * 用户
+ * 用户 Model类
  *
  * @date 2019-01-18 14:41:32
  */
 @Data
 @NoArgsConstructor
-public class User implements Serializable {
+public class UserQueryReq extends PageReq implements Serializable {
 
-    /**
-     * ID
-     */
-    private Integer id;
     /**
      * 用户id
      */
@@ -29,10 +23,6 @@ public class User implements Serializable {
      * 姓名
      */
     private String name;
-    /**
-     * 密码
-     */
-    private String password;
     /**
      * 账户
      */
@@ -53,13 +43,5 @@ public class User implements Serializable {
      * 创建时间
      */
     private Date createTime;
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    public User(int id) {
-        this.id = id;
-    }
 
 }
