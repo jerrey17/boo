@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 
         UserQueryModel model = new UserQueryModel();
         BeanUtils.copyProperties(req, model);
-
+        model.setDelFlag(DelFlagEnum.COMMON.getCode());
         return userMapper.selectByPage(model);
     }
 

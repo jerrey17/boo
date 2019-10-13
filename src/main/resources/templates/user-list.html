@@ -8,14 +8,57 @@
 </head>
 
 <body>
+
+<form class="layui-form layui-form-pane" id="testForm" lay-filter="searchFilter" action="">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" value="测试姓名" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">账户名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="account" placeholder="请输入账户名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">email</label>
+            <div class="layui-input-inline">
+                <input type="text" name="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-inline">
+                <select name="userStatus">
+                    <option value="">--</option>
+                    <option value="0">禁用</option>
+                    <option value="1">正常</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">注册时间</label>
+            <div class="layui-input-inline">
+                <input type="text" id="beginTimeText" class="layui-input" name="beginTime" placeholder="起始时间">
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" id="endTimeText" class="layui-input" name="endTime" placeholder="结束时间">
+            </div>
+        </div>
+    </div>
+</form>
+
 <table class="layui-hide" id="listTable" lay-filter="listTable"></table>
 
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" onclick="add()">新增</button>
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+        <button class="layui-btn layui-btn-sm" lay-event="add">新增</button>
+        <button class="layui-btn layui-btn-sm" lay-event="search">查询</button>
     </div>
 </script>
 
@@ -27,13 +70,25 @@
 <th:block th:replace="common-src :: common_js"/>
 
 <script type="application/javascript">
-    layui.use('table', function () {
-        var table = layui.table;
+    layui.use(['form', 'table', 'laydate'], function () {
+        var table = layui.table,
+            form = layui.form,
+            layDate = layui.laydate;
+
+        layDate.render({
+            elem: '#beginTimeText'
+            , type: 'datetime'
+        });
+        layDate.render({
+            elem: '#endTimeText'
+            , type: 'datetime'
+        });
 
         table.render({
             elem: '#listTable'
             , url: '/user/list'
             , toolbar: '#toolbarDemo'
+            , loading: 'true'
             , defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示'
                 , layEvent: 'LAYTABLE_TIPS'
@@ -73,11 +128,6 @@
             , page: true
         });
 
-        function add(obj) {
-            layer.alert(obj.config.id);
-        }
-
-
         //头工具栏事件
         table.on('toolbar(listTable)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);
@@ -91,7 +141,25 @@
                     layer.msg('选中了：' + data.length + ' 个');
                     break;
                 case 'isAll':
+                    alert("fck");
+                    table.reload({ //其它参数在此省略
+                        url: '/user/list'
+                        , where: {name: 'ruijie.zhang'} //如果无需传递额外参数，可不加该参数
+                        //method: 'post' //如果无需自定义HTTP类型，可不加该参数
+                        //request: {} //如果无需自定义请求参数，可不加该参数
+                        //response: {} //如果无需自定义数据响应名称，可不加该参数
+                    });
                     layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                    break;
+                case 'search':
+                    var searchData = {};
+                    var formData = $('#testForm').serializeArray();
+                    $.each(formData, function() {
+                        searchData[this.name] = this.value;
+                    });
+                    table.reload("listTable", {
+                        where: searchData
+                    });
                     break;
 
                 //自定义头工具栏右侧图标 - 提示
